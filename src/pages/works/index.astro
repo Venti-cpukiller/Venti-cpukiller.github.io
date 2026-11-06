@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../consts';
+
+const works = (await getCollection('works')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base title={`作品 · ${SITE.title}`} description={`${SITE.author} 的作品集`}>
+  <h1 class="page-title">作品</h1>
+  <div class="card-grid">
+    {works.map((work) => (
+      <a class="card" href={`/works/${work.id}/`}>
+        <span class="card-icon">{work.data.icon}</span>
+        <h3>{work.data.title}</h3>
+        <p>{work.data.description}</p>
+        {work.data.tags.length > 0 && (
+          <span class="tags">
+            {work.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </span>
+        )}
+      </a>
+    ))}
+  </div>
+</Base>

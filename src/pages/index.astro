@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { SITE } from '../consts';
+
+const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const featuredWorks = (await getCollection('works'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base>
+  <section class="hero">
+    <h1>你好，我是 {SITE.author} 👋</h1>
+    <p class="hero-intro">
+      欢迎来我的个人小站。这里记录我折腾的东西、写一点文章、囤放自己的作品。
+      （这句介绍在 src/consts.ts 和本文件里改）
+    </p>
+    <div class="hero-links">
+      {SITE.socials.map((s) => (
+        <a class="chip" href={s.href} target="_blank" rel="noopener">{s.label} ↗</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="section-head">
+      <h2>最近的文章</h2>
+      <a class="more" href="/blog/">全部文章 →</a>
+    </div>
+    <ul class="post-list">
+      {latestPosts.map((post) => (
+        <li>
+          <a class="post-item" href={`/blog/${post.id}/`}>
+            <div class="post-main">
+              <span class="post-title">{post.data.title}</span>
+              {post.data.description && (
+                <span class="post-desc">{post.data.description}</span>
+              )}
+            </div>
+            <time class="post-date" datetime={post.data.date.toISOString()}>
+              {post.data.date.toISOString().slice(0, 10)}
+            </time>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="home-section">
+    <div class="section-head">
+      <h2>精选作品</h2>
+      <a class="more" href="/works/">全部作品 →</a>
+    </div>
+    <div class="card-grid">
+      {featuredWorks.map((work) => (
+        <a class="card" href={`/works/${work.id}/`}>
+          <span class="card-icon">{work.data.icon}</span>
+          <h3>{work.data.title}</h3>
+          <p>{work.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

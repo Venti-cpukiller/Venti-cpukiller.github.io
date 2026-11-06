@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import { SITE } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE.title, description = SITE.description } = Astro.props;
+
+const nav = [
+  { href: '/', label: '首页' },
+  { href: '/blog/', label: '博客' },
+  { href: '/works/', label: '作品' },
+  { href: '/about/', label: '关于' },
+];
+
+const current = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : current.startsWith(href);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      // 页面绘制前先定好主题，避免刷新时闪一下错误的配色
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const theme =
+          saved ??
+          (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="/">{SITE.title}</a>
+        <nav class="site-nav" aria-label="主导航">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换深色 / 浅色模式"></button>
+      </div>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          © {new Date().getFullYear()} {SITE.author} · 用
+          <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> 搭建
+        </p>
+        <p>
+          托管于 GitHub Pages 与 Cloudflare Pages ·
+          <a href="/rss.xml">RSS 订阅</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('theme-toggle') as HTMLButtonElement;
+      const setIcon = () => {
+        btn.textContent =
+          document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
+      };
+      setIcon();
+      btn.addEventListener('click', () => {
+        const next =
+          document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+        setIcon();
+      });
+    </script>
+  </body>
+</html>
