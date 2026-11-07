@@ -12,6 +12,8 @@ const blog = defineCollection({
     description: z.string().optional(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
+    /** 封面图路径（可选），敲敲风信息流里会显示 */
+    cover: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

@@ -7,9 +7,10 @@ import { SITE } from '../consts';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title = SITE.title, description = SITE.description } = Astro.props;
+const { title = SITE.title, description = SITE.description, ogImage } = Astro.props;
 
 // 博客/作品是主页上的锚点区块（摄影归入作品大类）；关于是独立页
 const nav = [
@@ -40,7 +41,7 @@ const isActive = (href: string) => {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
-    <meta property="og:image" content={new URL('/img/avatar.jpg', Astro.site)} />
+    <meta property="og:image" content={new URL(ogImage ?? '/img/avatar.jpg', Astro.site)} />
     <meta name="twitter:card" content="summary" />
     <title>{title}</title>
     <ClientRouter />
@@ -61,12 +62,8 @@ const isActive = (href: string) => {
           saved ??
           (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
-        const art = localStorage.getItem('art-style');
-        if (art) {
-          document.documentElement.dataset.art = art;
-        } else {
-          delete document.documentElement.dataset.art;
-        }
+        const art = localStorage.getItem('art-style') || 'zzz';
+        document.documentElement.dataset.art = art;
       };
       applyTheme();
       document.addEventListener('astro:after-swap', applyTheme);
@@ -144,14 +141,6 @@ const isActive = (href: string) => {
     <audio id="bgm" src="/audio/bgm.m4a" loop preload="none" transition:persist="bgm"></audio>
     <button id="bgm-toggle" class="bgm-toggle" type="button" aria-label="播放 / 暂停背景音乐" title="背景音乐">♪</button>
 
-    <!-- 设计风格预览切换器（选定风格后整体移除） -->
-    <div id="art-switcher" class="art-switcher">
-      <span class="art-switcher-label">风格预览</span>
-      <button type="button" data-art-set="">默认</button>
-      <button type="button" data-art-set="sketch">手绘</button>
-      <button type="button" data-art-set="zzz">绝区零</button>
-    </div>
-
     <script>
       // astro:page-load 在首次加载和每次跨页导航后都会触发：
       // 给「当前页面」的按钮重新绑定事件（音频元素本身是持久的，不用重绑）
@@ -194,20 +183,6 @@ const isActive = (href: string) => {
           setIcon();
           setGiscusTheme(next);
         };
-
-        // 设计风格预览切换器（选定后移除）
-        document.querySelectorAll('[data-art-set]').forEach((b) => {
-          (b as HTMLButtonElement).onclick = () => {
-            const v = (b as HTMLButtonElement).getAttribute('data-art-set') || '';
-            if (v) {
-              document.documentElement.dataset.art = v;
-              localStorage.setItem('art-style', v);
-            } else {
-              delete document.documentElement.dataset.art;
-              localStorage.removeItem('art-style');
-            }
-          };
-        });
 
         // 背景音乐按钮：按音频元素的真实状态同步外观
         const bgm = document.getElementById('bgm') as HTMLAudioElement;

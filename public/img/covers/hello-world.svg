@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="28" height="28" fill="#141419"/>
+      <line x1="0" y1="0" x2="0" y2="28" stroke="#202027" stroke-width="1"/>
+    </pattern>
+    <pattern id="hazard" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="24" height="24" fill="#17171b"/>
+      <rect width="12" height="24" fill="#ff5e1a"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect y="0" width="1200" height="16" fill="url(#hazard)"/>
+  <rect y="659" width="1200" height="16" fill="url(#hazard)"/>
+
+  <g transform="rotate(-3 250 120)">
+    <rect x="60" y="70" width="300" height="52" fill="#ff5e1a"/>
+    <text x="78" y="107" font-size="26" font-weight="900" fill="#0d0d10" letter-spacing="3">VELTI'S SITE</text>
+  </g>
+
+  <text x="80" y="330" font-size="150" font-weight="900" font-style="italic" fill="#ff5e1a" letter-spacing="4">HELLO,</text>
+  <text x="80" y="470" font-size="150" font-weight="900" font-style="italic" fill="#ff5e1a" letter-spacing="4">WORLD!</text>
+  <text x="72" y="322" font-size="150" font-weight="900" font-style="italic" fill="#f0f0f3" letter-spacing="4">HELLO,</text>
+  <text x="72" y="462" font-size="150" font-weight="900" font-style="italic" fill="#f0f0f3" letter-spacing="4">WORLD!</text>
+
+  <text x="84" y="560" font-size="42" font-weight="700" fill="#f0f0f3">我的小站上线了</text>
+  <text x="84" y="612" font-size="26" fill="#9a9aa6">ASTRO × GITHUB PAGES × CLOUDFLARE = ¥0</text>
+
+  <g opacity="0.9">
+    <rect x="1000" y="480" width="120" height="120" fill="none" stroke="#ff5e1a" stroke-width="6"/>
+    <text x="1035" y="560" font-size="64" font-weight="900" fill="#ff5e1a">★</text>
+  </g>
+</svg>

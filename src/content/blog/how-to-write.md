@@ -3,6 +3,7 @@ title: "写文章速查表"
 description: "常用 Markdown 语法在这个博客里的效果，照着抄就行。"
 date: 2026-11-06
 tags: ["Markdown", "速查"]
+cover: "/img/covers/how-to-write.svg"
 ---
 
 给自己留的一份速查表，发文章忘了语法就回来抄。

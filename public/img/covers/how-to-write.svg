@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <pattern id="grid2" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="28" height="28" fill="#141419"/>
+      <line x1="0" y1="0" x2="0" y2="28" stroke="#202027" stroke-width="1"/>
+    </pattern>
+    <pattern id="hazard2" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="24" height="24" fill="#17171b"/>
+      <rect width="12" height="24" fill="#ff5e1a"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#grid2)"/>
+  <rect y="0" width="1200" height="16" fill="url(#hazard2)"/>
+  <rect y="659" width="1200" height="16" fill="url(#hazard2)"/>
+
+  <!-- 代码窗口 -->
+  <g>
+    <rect x="620" y="90" width="500" height="380" rx="10" fill="#0d0d10" stroke="#2e2e36" stroke-width="2"/>
+    <rect x="620" y="90" width="500" height="44" rx="10" fill="#1b1b21"/>
+    <circle cx="650" cy="112" r="8" fill="#ff5e1a"/>
+    <circle cx="676" cy="112" r="8" fill="#f0f0f3"/>
+    <circle cx="702" cy="112" r="8" fill="#9a9aa6"/>
+    <text x="840" y="119" font-size="16" fill="#9a9aa6" font-family="Consolas, monospace">draft.md — 草稿</text>
+    <text x="650" y="180" font-size="26" font-family="Consolas, monospace" fill="#ff5e1a">## 二级标题</text>
+    <text x="650" y="225" font-size="26" font-family="Consolas, monospace" fill="#f0f0f3">**加粗** *斜体* `代码`</text>
+    <text x="650" y="270" font-size="26" font-family="Consolas, monospace" fill="#9a9aa6">- 列表一</text>
+    <text x="650" y="315" font-size="26" font-family="Consolas, monospace" fill="#f0f0f3">- 列表二</text>
+    <text x="650" y="360" font-size="26" font-family="Consolas, monospace" fill="#ff5e1a">&gt; 一句引用</text>
+    <text x="650" y="405" font-size="26" font-family="Consolas, monospace" fill="#f0f0f3">[链接](https://…)</text>
+    <text x="650" y="450" font-size="26" font-family="Consolas, monospace" fill="#9a9aa6">![图片](/img/…)</text>
+  </g>
+
+  <g transform="rotate(-3 250 120)">
+    <rect x="60" y="70" width="300" height="52" fill="#ff5e1a"/>
+    <text x="78" y="107" font-size="26" font-weight="900" fill="#0d0d10" letter-spacing="3">CHEAT SHEET</text>
+  </g>
+
+  <text x="60" y="330" font-size="86" font-weight="900" font-style="italic" fill="#f0f0f3">写文章</text>
+  <text x="60" y="430" font-size="86" font-weight="900" font-style="italic" fill="#ff5e1a">速查表</text>
+  <text x="62" y="510" font-size="26" fill="#9a9aa6">MARKDOWN SYNTAX CHEATSHEET</text>
+  <text x="62" y="560" font-size="26" fill="#9a9aa6">忘了语法？回来抄就行。</text>
+</svg>

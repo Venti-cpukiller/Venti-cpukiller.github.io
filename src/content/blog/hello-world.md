@@ -3,6 +3,7 @@ title: "你好，世界：我的小站上线了"
 description: "这个网站是怎么搭起来的：Astro + GitHub Pages + Cloudflare Pages，全程零成本。"
 date: 2026-11-06
 tags: ["建站", "折腾"]
+cover: "/img/covers/hello-world.svg"
 ---
 
 欢迎来到我的小站！这是第一篇文章，顺便记录一下这个网站是怎么搭起来的。

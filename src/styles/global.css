@@ -632,6 +632,116 @@ section[id] {
   scroll-margin-top: 4.5rem;
 }
 
+/* ================= 博客信息流（敲敲风） ================= */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.feed-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.feed-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+}
+
+.feed-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+.feed-author {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.feed-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.feed-date {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.feed-tags {
+  margin-left: auto;
+}
+
+.feed-cover {
+  display: block;
+}
+
+.feed-cover img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.feed-cover-fallback {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--muted);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent-soft) 0 14px,
+    var(--bg-soft) 14px 28px
+  );
+}
+
+.feed-body {
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.feed-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+}
+
+.feed-title a {
+  color: var(--fg);
+}
+
+.feed-title a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.feed-desc {
+  margin: 0 0 0.7rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* 文章详情页封面 */
+.article-cover {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
 /* ================= 评论 ================= */
 .comments {
   margin-top: 3rem;

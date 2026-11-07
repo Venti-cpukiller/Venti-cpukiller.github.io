@@ -325,3 +325,24 @@ html[data-art='zzz'] .hero-avatar img {
   box-shadow: 8px 8px 0 var(--accent);
   transform: rotate(-1.2deg);
 }
+
+/* 敲敲风信息流：直角卡片 + 硬阴影 */
+html[data-art='zzz'] .feed-card {
+  border: 2px solid var(--border);
+  border-radius: 0;
+}
+
+html[data-art='zzz'] .feed-card:hover {
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+html[data-art='zzz'] .feed-avatar {
+  border-radius: 0;
+  border-width: 2px;
+}
+
+html[data-art='zzz'] .article-cover {
+  border-radius: 0;
+  border: 2px solid var(--border);
+  box-shadow: 8px 8px 0 var(--accent-soft);
+}
