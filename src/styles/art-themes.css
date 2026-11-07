@@ -149,7 +149,7 @@ html[data-art='zzz'] .site-header::after {
     var(--accent) 0 12px,
     var(--fg) 12px 24px
   );
-  animation: zzz-hazard 1.2s linear infinite;
+  animation: zzz-hazard 1.2s linear infinite reverse;
   pointer-events: none;
 }
 
@@ -232,7 +232,7 @@ html[data-art='zzz'] .bgm-toggle.playing {
   color: var(--accent);
 }
 
-/* 回到页首：与播放键同款橙色方块 */
+/* 回到页首：与播放键同款橙色方块，悬停反白 */
 html[data-art='zzz'] .back-top {
   border-radius: 0;
   border: 2px solid var(--accent);
@@ -241,7 +241,13 @@ html[data-art='zzz'] .back-top {
 }
 
 html[data-art='zzz'] .back-top:hover {
-  background: var(--fg);
+  background: #ffffff;
+  color: var(--accent);
+}
+
+/* 播放键悬停同样反白 */
+html[data-art='zzz'] .bgm-toggle:hover {
+  background: #ffffff;
   color: var(--accent);
 }
 

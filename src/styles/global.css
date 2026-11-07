@@ -557,8 +557,8 @@ main.container {
 /* ================= 回到页首按钮 ================= */
 .back-top {
   position: fixed;
-  left: 1.25rem;
-  bottom: 1.25rem;
+  right: 1.25rem;
+  bottom: 4.55rem;
   z-index: 20;
   width: 2.8rem;
   height: 2.8rem;
