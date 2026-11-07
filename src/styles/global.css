@@ -583,42 +583,6 @@ main.container {
   border-color: var(--accent);
 }
 
-/* 播放中：声波涟漪从按钮向外扩散（两圈相位错开） */
-.bgm-toggle.playing::before,
-.bgm-toggle.playing::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 50%;
-  border: 2px solid var(--accent);
-  opacity: 0;
-  pointer-events: none;
-  animation: bgm-ripple 2.2s ease-out infinite;
-}
-
-.bgm-toggle.playing::after {
-  animation-delay: 1.1s;
-}
-
-@keyframes bgm-ripple {
-  0% {
-    transform: scale(1);
-    opacity: 0.65;
-  }
-  100% {
-    transform: scale(1.85);
-    opacity: 0;
-  }
-}
-
-/* 尊重系统的「减少动态效果」设置 */
-@media (prefers-reduced-motion: reduce) {
-  .bgm-toggle.playing::before,
-  .bgm-toggle.playing::after {
-    animation: none;
-  }
-}
-
 .contact-line {
   margin-top: 0.4rem;
 }

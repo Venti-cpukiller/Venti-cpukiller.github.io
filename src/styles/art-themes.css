@@ -232,7 +232,7 @@ html[data-art='zzz'] .zzz-marquee {
   display: block;
 }
 
-/* 巨型描边水印 */
+/* 巨型描边水印：垫在左侧文字下方 */
 html[data-art='zzz'] .hero {
   position: relative;
   overflow: hidden;
@@ -241,10 +241,10 @@ html[data-art='zzz'] .hero {
 html[data-art='zzz'] .hero::before {
   content: 'VENTI';
   position: absolute;
-  right: -1rem;
-  top: 45%;
-  transform: translateY(-50%) rotate(-6deg);
-  font-size: clamp(6rem, 16vw, 11rem);
+  left: -1rem;
+  bottom: -2.5rem;
+  transform: rotate(-6deg);
+  font-size: clamp(5rem, 12vw, 9rem);
   font-weight: 900;
   font-style: italic;
   line-height: 1;
