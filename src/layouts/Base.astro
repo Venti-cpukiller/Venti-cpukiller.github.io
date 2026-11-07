@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import { SITE } from '../consts';
 
 interface Props {
@@ -30,15 +31,19 @@ const isActive = (href: string) =>
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <ClientRouter />
     <script is:inline>
-      // 页面绘制前先定好主题，避免刷新时闪一下错误的配色
-      (() => {
+      // 页面绘制前先定好主题，避免刷新时闪一下错误的配色；
+      // 跨页导航（astro:after-swap）后再应用一次，防止主题丢失
+      const applyTheme = () => {
         const saved = localStorage.getItem('theme');
         const theme =
           saved ??
           (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
-      })();
+      };
+      applyTheme();
+      document.addEventListener('astro:after-swap', applyTheme);
     </script>
   </head>
   <body>
@@ -77,49 +82,115 @@ const isActive = (href: string) =>
         </p>
         <p class="contact-line">
           联系我：
-          {SITE.contact.map((c, i) => (
-            <>
-              <span class="contact-item">{c.label}：{c.value || '待补'}</span>
-              {i < SITE.contact.length - 1 && ' · '}
-            </>
-          ))}
+          {
+            SITE.contact.map((c, i) => (
+              <>
+                <span class="contact-item">
+                  {c.href ? (
+                    <a
+                      href={c.href}
+                      target={c.href.startsWith('http') ? '_blank' : undefined}
+                      rel="noopener"
+                    >
+                      {c.label}：{c.value}
+                    </a>
+                  ) : (
+                    `${c.label}：${c.value || '待补'}`
+                  )}
+                </span>
+                {i < SITE.contact.length - 1 && ' · '}
+              </>
+            ))
+          }
         </p>
       </div>
     </footer>
 
-    <audio id="bgm" src="/audio/bgm.m4a" loop preload="none"></audio>
+    <!-- 音乐元素跨页持久存在（配合 ClientRouter），切换页面时音乐不断 -->
+    <audio id="bgm" src="/audio/bgm.m4a" loop preload="none" transition:persist="bgm"></audio>
     <button id="bgm-toggle" class="bgm-toggle" type="button" aria-label="播放 / 暂停背景音乐" title="背景音乐">♪</button>
 
     <script>
-      const btn = document.getElementById('theme-toggle') as HTMLButtonElement;
-      const setIcon = () => {
-        btn.textContent =
-          document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
-      };
-      setIcon();
-      btn.addEventListener('click', () => {
-        const next =
-          document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        localStorage.setItem('theme', next);
+      // astro:page-load 在首次加载和每次跨页导航后都会触发：
+      // 给「当前页面」的按钮重新绑定事件（音频元素本身是持久的，不用重绑）
+      document.addEventListener('astro:page-load', () => {
+        // 主题切换
+        const btn = document.getElementById('theme-toggle') as HTMLButtonElement;
+        const setIcon = () => {
+          btn.textContent =
+            document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
+        };
         setIcon();
-      });
+        btn.onclick = () => {
+          const next =
+            document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          localStorage.setItem('theme', next);
+          setIcon();
+        };
 
-      // 背景音乐：点按钮播放/暂停，加载失败时静默隐藏按钮
-      const bgm = document.getElementById('bgm') as HTMLAudioElement;
-      const bgmBtn = document.getElementById('bgm-toggle') as HTMLButtonElement;
-      bgmBtn.addEventListener('click', () => {
-        if (bgm.paused) {
-          bgm.play().catch(() => {});
-          bgmBtn.classList.add('playing');
-        } else {
-          bgm.pause();
-          bgmBtn.classList.remove('playing');
+        // 背景音乐按钮：按音频元素的真实状态同步外观
+        const bgm = document.getElementById('bgm') as HTMLAudioElement;
+        const bgmBtn = document.getElementById('bgm-toggle') as HTMLButtonElement;
+        const syncBtn = () => bgmBtn.classList.toggle('playing', !bgm.paused);
+        syncBtn();
+        bgmBtn.onclick = () => {
+          if (bgm.paused) {
+            bgm.play().catch(() => {});
+          } else {
+            bgm.pause();
+            // 用户主动停掉，就不再自动续播
+            sessionStorage.removeItem('bgm-want');
+          }
+        };
+
+        // 加载失败时静默隐藏按钮（音频元素跨页持久，绑定一次即可）
+        if (!bgm.dataset.errBound) {
+          bgm.dataset.errBound = '1';
+          bgm.addEventListener('error', () => {
+            bgmBtn.style.display = 'none';
+          });
+          // 真正响起后确认「想听」已满足，撕掉标志牌
+          bgm.addEventListener('playing', () => {
+            sessionStorage.removeItem('bgm-want');
+          });
+        }
+
+        // 「想听」标志还挂着 → 换页完成后无脑再试 play()：
+        // 对正在播的元素是无害空操作；对被换页打断的则完成续播
+        if (sessionStorage.getItem('bgm-want') === '1') {
+          bgm.play().catch(() => {
+            // 瞬时激活窗口已过期时，挂一次性点击兜底
+            document.addEventListener(
+              'click',
+              () => document.getElementById('bgm')?.play().catch(() => {}),
+              { once: true },
+            );
+          });
         }
       });
-      bgm.addEventListener('error', () => {
-        bgmBtn.style.display = 'none';
-      });
+
+      // 自动播放：每个浏览器会话只尝试一次；被浏览器策略拦截时，
+      // 等访客第一次点击页面任意处再开始播放
+      if (!sessionStorage.getItem('bgm-started')) {
+        sessionStorage.setItem('bgm-started', '1');
+        const tryPlay = () => {
+          const bgm = document.getElementById('bgm');
+          if (!bgm) return;
+          bgm.play().catch(() => {
+            sessionStorage.setItem('bgm-want', '1');
+            document.addEventListener(
+              'click',
+              () => {
+                sessionStorage.setItem('bgm-want', '1');
+                document.getElementById('bgm')?.play().catch(() => {});
+              },
+              { once: true },
+            );
+          });
+        };
+        tryPlay();
+      }
     </script>
   </body>
 </html>

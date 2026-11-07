@@ -14,16 +14,26 @@ export const SITE = {
    */
   socials: [
     { label: 'GitHub', href: 'https://github.com/Venti-cpukiller' },
-    { label: 'Bilibili', href: 'https://space.bilibili.com/your-id' },
-    { label: '邮箱', href: 'mailto:you@example.com' },
+    { label: 'Bilibili', href: 'https://space.bilibili.com/516191350' },
+    { label: '邮箱', href: 'mailto:1913554056@qq.com' },
   ],
   /**
-   * 页脚联系方式：value 随时填，留空的会显示「待补」。
+   * 页脚联系方式：value 随时填，href 是点击后跳转的地址（可选）。
+   * 邮箱用 mailto: 开头就会直接唤起写信；QQ 用 wpa.qq.com 链接发起临时会话。
    * 想加微信/知乎等，照格式补一行即可。
    */
   contact: [
-    { label: 'QQ', value: '' },
-    { label: '邮箱', value: '' },
-    { label: 'B站', value: '' },
+    {
+      label: 'QQ',
+      value: '1913554056',
+      href: 'https://wpa.qq.com/msgrd?v=3&uin=1913554056&site=qq&menu=yes',
+    },
+    { label: '邮箱', value: '1913554056@qq.com', href: 'mailto:1913554056@qq.com' },
+    {
+      label: 'Gmail',
+      value: 'halenacarlee43265@gmail.com',
+      href: 'mailto:halenacarlee43265@gmail.com',
+    },
+    { label: 'B站', value: '516191350', href: 'https://space.bilibili.com/516191350' },
   ],
 };
