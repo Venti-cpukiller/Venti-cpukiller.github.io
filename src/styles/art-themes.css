@@ -232,6 +232,17 @@ html[data-art='zzz'] .bgm-toggle.playing {
   color: var(--accent);
 }
 
+/* 引出按钮与主按钮悬停反白（与双钮统一） */
+html[data-art='zzz'] .chip:hover {
+  background: #ffffff;
+  color: var(--accent);
+}
+
+html[data-art='zzz'] .button:hover {
+  background: #ffffff;
+  color: var(--accent);
+}
+
 /* 回到页首：与播放键同款橙色方块，悬停反白 */
 html[data-art='zzz'] .back-top {
   border-radius: 0;
@@ -289,21 +300,20 @@ html[data-art='zzz'] .article-cover {
 }
 
 .zzz-marquee span {
-  display: inline-block;
+  flex-shrink: 0;
+  min-width: 100%;
   animation: zzz-ticker 22s linear infinite;
 }
 
+/* 双份等宽内容 + 位移 100%：无缝循环，永不回弹 */
 @keyframes zzz-ticker {
-  from {
-    transform: translateX(0);
-  }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 html[data-art='zzz'] .zzz-marquee {
-  display: block;
+  display: flex;
 }
 
 /* 巨型描边水印：垫在左侧文字下方 */
