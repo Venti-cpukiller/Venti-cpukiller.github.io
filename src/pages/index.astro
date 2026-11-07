@@ -16,9 +16,11 @@ const featuredWorks = (await getCollection('works'))
   <section class="hero">
     <h1>你好，我是 {SITE.author} 👋</h1>
     <p class="hero-intro">
-      一个爱好广泛的家伙：耳机不离身的音乐爱好者、快门闲不住的摄影新手、
-      二游深度玩家，最近又开始对写代码上头。喜欢一切好玩的东西，
-      更喜欢亲手把它们造出来。这个站收藏我的文字、作品和快门瞬间——慢慢逛，别着急。
+      昆明理工大学机器人工程苦逼大二学生，爱好广泛得有点过分：
+      耳机不离身的音乐爱好者、快门闲不住的摄影新手、二游深度玩家、
+      骑车看地图的地理人文爱好者、语言学好奇者，最近又对写代码上了头。
+      喜欢一切好玩的东西，更喜欢亲手把它们造出来。
+      这个站收藏我的文字、作品和快门瞬间——慢慢逛，别着急。
     </p>
     <div class="hero-links">
       {SITE.socials.map((s) => (
@@ -53,27 +55,33 @@ const featuredWorks = (await getCollection('works'))
 
   <section id="works" class="home-section">
     <div class="section-head">
-      <h2>精选作品</h2>
+      <h2>作品</h2>
       <a class="more" href="/works/">全部作品 →</a>
     </div>
-    <div class="card-grid">
-      {featuredWorks.map((work) => (
-        <a class="card" href={`/works/${work.id}/`}>
-          <span class="card-icon">{work.data.icon}</span>
-          <h3>{work.data.title}</h3>
-          <p>{work.data.description}</p>
-        </a>
-      ))}
-    </div>
-  </section>
 
-  <section id="photo" class="home-section">
-    <div class="section-head">
-      <h2>摄影</h2>
+    <!-- 分类一：项目。
+         以后想加新分类（设计、视频、写作……），照这一块的结构复制一份：
+         <div class="work-category"> <h3>分类名</h3> 内容 </div> -->
+    <div class="work-category">
+      <h3>项目</h3>
+      <div class="card-grid">
+        {featuredWorks.map((work) => (
+          <a class="card" href={`/works/${work.id}/`}>
+            <span class="card-icon">{work.data.icon}</span>
+            <h3>{work.data.title}</h3>
+            <p>{work.data.description}</p>
+          </a>
+        ))}
+      </div>
     </div>
-    <div class="photo-placeholder">
-      <span class="photo-icon">📷</span>
-      <p>摄影作品整理中——这里以后会挂上我的快门瞬间。</p>
+
+    <!-- 分类二：摄影 -->
+    <div class="work-category">
+      <h3>摄影</h3>
+      <div class="photo-placeholder">
+        <span class="photo-icon">📷</span>
+        <p>摄影作品整理中——这里以后会挂上我的快门瞬间。</p>
+      </div>
     </div>
   </section>
 </Base>

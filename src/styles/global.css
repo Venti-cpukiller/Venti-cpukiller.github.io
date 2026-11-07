@@ -453,6 +453,17 @@ main.container {
   margin: 2rem 0;
 }
 
+/* ================= 作品分类子块 ================= */
+.work-category + .work-category {
+  margin-top: 2rem;
+}
+
+.work-category h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.02rem;
+  color: var(--muted);
+}
+
 /* ================= 摄影占位 ================= */
 .photo-placeholder {
   display: flex;

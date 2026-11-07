@@ -10,12 +10,11 @@ interface Props {
 
 const { title = SITE.title, description = SITE.description } = Astro.props;
 
-// 博客/作品/摄影是主页上的锚点区块；关于是独立页
+// 博客/作品是主页上的锚点区块（摄影归入作品大类）；关于是独立页
 const nav = [
   { href: '/', label: '首页' },
   { href: '/#blog', label: '博客' },
   { href: '/#works', label: '作品' },
-  { href: '/#photo', label: '摄影' },
   { href: '/about/', label: '关于' },
 ];
 
