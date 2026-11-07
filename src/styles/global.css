@@ -650,13 +650,23 @@ section[id] {
 
 .feed-cover {
   display: block;
+  height: 300px;
+  overflow: hidden;
 }
 
+/* 封面统一高度、宽度随原图比例自然变化——参差感是刻意的 */
 .feed-cover img {
   display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .feed-cover {
+    height: 210px;
+  }
 }
 
 .feed-cover-fallback {
@@ -704,6 +714,84 @@ section[id] {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   margin-bottom: 2rem;
+}
+
+/* ================= 首页博客区：限高 + 模糊渐隐 + 阅览更多 ================= */
+.home-feed-clip {
+  position: relative;
+  max-height: 33rem;
+  overflow: hidden;
+}
+
+.home-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.home-feed-grid .feed-cover {
+  height: 170px;
+}
+
+.home-feed-grid .feed-cover img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.home-feed-grid .feed-body {
+  padding: 0.75rem 0.9rem 0.95rem;
+}
+
+.home-feed-grid .feed-title {
+  font-size: 1rem;
+}
+
+.home-feed-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 9rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1.3rem;
+  background: linear-gradient(to bottom, transparent, var(--bg) 80%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* ================= 博客详情页：报刊多列排版 ================= */
+.article-post {
+  max-width: 62rem;
+}
+
+.article-post .prose {
+  font-size: 1rem;
+}
+
+@media (min-width: 700px) {
+  .article-post .prose {
+    columns: 2;
+    column-gap: 2.5rem;
+    column-rule: 1px dashed var(--border);
+  }
+}
+
+@media (min-width: 1150px) {
+  .article-post .prose {
+    columns: 3;
+  }
+}
+
+/* 多列排版时整块元素不跨列断开 */
+.article-post .prose pre,
+.article-post .prose img,
+.article-post .prose blockquote,
+.article-post .prose table {
+  break-inside: avoid;
+}
+
+.article-post .prose h2 {
+  margin-top: 0;
 }
 
 /* ================= 评论 ================= */
@@ -849,3 +937,4 @@ section[id] {
     height: 160px;
   }
 }
+

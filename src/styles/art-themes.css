@@ -146,6 +146,20 @@ html[data-art='zzz'] .site-header::after {
     var(--accent) 0 12px,
     var(--fg) 12px 24px
   );
+  /* 条纹滚动动画 */
+  animation: zzz-hazard 1.4s linear infinite;
+}
+
+@keyframes zzz-hazard {
+  to {
+    background-position: 33.94px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-art='zzz'] .site-header::after {
+    animation: none;
+  }
 }
 
 html[data-art='zzz'] .site-header,

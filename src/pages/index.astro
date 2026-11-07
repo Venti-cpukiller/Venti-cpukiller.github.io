@@ -5,7 +5,7 @@ import { SITE } from '../consts';
 
 const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+  .slice(0, 6);
 
 const featuredWorks = (await getCollection('works'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -48,23 +48,47 @@ const featuredWorks = (await getCollection('works'))
       <h2>最近的文章</h2>
       <a class="more" href="/blog/">全部文章 →</a>
     </div>
-    <ul class="post-list">
-      {latestPosts.map((post) => (
-        <li>
-          <a class="post-item" href={`/blog/${post.id}/`}>
-            <div class="post-main">
-              <span class="post-title">{post.data.title}</span>
-              {post.data.description && (
-                <span class="post-desc">{post.data.description}</span>
+    <div class="home-feed-clip">
+      <div class="home-feed-grid">
+        {latestPosts.map((post) => (
+          <article class="feed-card">
+            <div class="feed-head">
+              <img class="feed-avatar" src="/img/avatar.jpg" alt={SITE.author} width="40" height="40" />
+              <div class="feed-author">
+                <span class="feed-name">{SITE.author}</span>
+                <time class="feed-date" datetime={post.data.date.toISOString()}>
+                  {post.data.date.toISOString().slice(0, 10)}
+                </time>
+              </div>
+              {post.data.tags.length > 0 && (
+                <span class="tags feed-tags">
+                  {post.data.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </span>
               )}
             </div>
-            <time class="post-date" datetime={post.data.date.toISOString()}>
-              {post.data.date.toISOString().slice(0, 10)}
-            </time>
-          </a>
-        </li>
-      ))}
-    </ul>
+            <a class="feed-cover" href={`/blog/${post.id}/`} aria-label={post.data.title}>
+              {post.data.cover ? (
+                <img src={post.data.cover} alt={`${post.data.title} 封面图`} loading="lazy" />
+              ) : (
+                <div class="feed-cover-fallback" aria-hidden="true">✦</div>
+              )}
+            </a>
+            <div class="feed-body">
+              <h2 class="feed-title">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h2>
+              {post.data.description && <p class="feed-desc">{post.data.description}</p>}
+              <a class="more" href={`/blog/${post.id}/`}>阅读全文 →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="home-feed-fade">
+        <a class="button" href="/blog/">阅览更多 →</a>
+      </div>
+    </div>
   </section>
 
   <section id="works" class="home-section">
