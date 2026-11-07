@@ -13,7 +13,7 @@ export const SITE = {
    * 想加新的就照格式补一行（label 随便写）。
    */
   socials: [
-    { label: 'GitHub', href: 'https://github.com/your-username' },
+    { label: 'GitHub', href: 'https://github.com/Venti-cpukiller' },
     { label: 'Bilibili', href: 'https://space.bilibili.com/your-id' },
     { label: '邮箱', href: 'mailto:you@example.com' },
   ],
