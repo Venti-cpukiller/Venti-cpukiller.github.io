@@ -148,7 +148,7 @@ html[data-art='zzz'] .site-header::after {
     var(--fg) 12px 24px
   );
   background-size: 33.9411px 5px;
-  animation: zzz-hazard 1.2s linear infinite reverse;
+  animation: zzz-hazard 1.2s linear infinite;
 }
 
 /* 位移一个完整周期，回卷无接缝 */
