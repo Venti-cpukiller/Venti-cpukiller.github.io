@@ -242,11 +242,6 @@ main.container {
   letter-spacing: 0.01em;
 }
 
-.name-star {
-  color: var(--accent);
-  font-size: 0.6em;
-}
-
 .hero-footnote {
   margin: 0 0 1.2rem;
   color: var(--muted);
