@@ -3,27 +3,52 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../consts';
 ---
 
-<Base title={`关于 · ${SITE.title}`} description={`关于 ${SITE.author}`}>
+<Base title={`关于 · ${SITE.title}`} description={`关于 ${SITE.author}：${SITE.description}`}>
   <article class="article">
     <h1>关于我</h1>
     <div class="prose">
       <p>
-        你好，我是 {SITE.author}。（这是一段占位介绍——改成你自己的：
-        你是谁、在做什么、感兴趣什么。）
+        你好，我是 {SITE.author}——名字取自《原神》的温迪。本人不会吹笛子，
+        但耳机倒是常年挂在头上的。
       </p>
-      <h2>我在折腾</h2>
-      <ul>
-        <li>写点代码，搭点小工具</li>
-        <li>记录学习和生活</li>
-        <li>……（在这里补充）</li>
-      </ul>
-      <h2>找到我</h2>
       <p>
-        {SITE.socials.map((s) => (
-          <a href={s.href} target="_blank" rel="noopener">{s.label}</a>
-        ))}
-        <!-- 可以在中间补一些分隔，或改成一行一段 -->
+        昆明理工大学机器人工程专业的苦逼大二学生，爱好广泛得有点过分：
+        音乐循环永不停止；CCD 相机玩了快六年，正在攒钱升级微单；
+        二游深潜玩家；骑车看地图的地理人文爱好者；语言学好奇者；
+        最近又一头扎进了写代码的世界——你现在看到的这个网站就是产物之一。
       </p>
+      <h2>这个网站</h2>
+      <p>
+        用 <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> 搭的静态站，
+        托管在 GitHub Pages 和 Cloudflare Pages 上，全程零成本。
+        设计走了绝区零那种黑橙警示风；背景音乐是 HOYO-MiX 的
+        《60%的日常·悠闲》——右下角那个橙色方块就是开关。
+      </p>
+      <p>
+        这个站会放我的文章、摄影作品和一些折腾出来的小东西，
+        想到什么写什么，更新随缘。
+      </p>
+      <h2>联系我</h2>
+      <p>想聊天、交换友情链接，或者单纯打个招呼，都欢迎：</p>
+      <ul class="contact-list">
+        {SITE.contact.map((c) => (
+          <li>
+            <strong>{c.label}</strong>：
+            {c.href ? (
+              <a
+                href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener"
+              >
+                {c.value}
+              </a>
+            ) : (
+              c.value
+            )}
+          </li>
+        ))}
+      </ul>
+      <p class="muted">（点邮箱会直接唤起写信；QQ 走官方临时会话；B站直达主页。）</p>
     </div>
   </article>
 </Base>
