@@ -502,16 +502,6 @@ main.container {
 
 .bgm-toggle.playing {
   border-color: var(--accent);
-  animation: bgm-spin 3s linear infinite;
-}
-
-@keyframes bgm-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .contact-line {
@@ -520,6 +510,11 @@ main.container {
 
 .contact-line .contact-item {
   margin: 0 0.15rem;
+}
+
+/* 锚点定位时给吸顶导航留出空间 */
+section[id] {
+  scroll-margin-top: 4.5rem;
 }
 
 /* ================= 按钮 / 杂项 ================= */
