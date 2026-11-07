@@ -212,6 +212,40 @@ html[data-art='zzz'] .bgm-toggle {
   border: 2px solid var(--border);
 }
 
+/* 播放按钮并入主题色：待机橙色，播放反白 */
+html[data-art='zzz'] .bgm-toggle {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+html[data-art='zzz'] .bgm-toggle.playing {
+  background: var(--fg);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+/* 敲敲风信息流：直角卡片 + 硬阴影 */
+html[data-art='zzz'] .feed-card {
+  border: 2px solid var(--border);
+  border-radius: 0;
+}
+
+html[data-art='zzz'] .feed-card:hover {
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+html[data-art='zzz'] .feed-avatar {
+  border-radius: 0;
+  border-width: 2px;
+}
+
+html[data-art='zzz'] .article-cover {
+  border-radius: 0;
+  border: 2px solid var(--border);
+  box-shadow: 8px 8px 0 var(--accent-soft);
+}
+
 /* ============ 加大剂量：味要冲 ============ */
 
 /* 滚动横幅（只在绝区零风显示） */
@@ -338,25 +372,4 @@ html[data-art='zzz'] .hero-avatar img {
   border: 2px solid var(--border);
   box-shadow: 8px 8px 0 var(--accent);
   transform: rotate(-1.2deg);
-}
-
-/* 敲敲风信息流：直角卡片 + 硬阴影 */
-html[data-art='zzz'] .feed-card {
-  border: 2px solid var(--border);
-  border-radius: 0;
-}
-
-html[data-art='zzz'] .feed-card:hover {
-  box-shadow: 6px 6px 0 var(--accent);
-}
-
-html[data-art='zzz'] .feed-avatar {
-  border-radius: 0;
-  border-width: 2px;
-}
-
-html[data-art='zzz'] .article-cover {
-  border-radius: 0;
-  border: 2px solid var(--border);
-  box-shadow: 8px 8px 0 var(--accent-soft);
 }

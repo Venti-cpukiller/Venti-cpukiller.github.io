@@ -18,7 +18,7 @@ const { Content } = await render(post);
   description={post.data.description}
   ogImage={post.data.cover}
 >
-  <article class="article article-post">
+  <article class="article">
     {post.data.cover && (
       <img class="article-cover" src={post.data.cover} alt={`${post.data.title} 封面图`} />
     )}

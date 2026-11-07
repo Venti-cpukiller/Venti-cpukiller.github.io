@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <pattern id="grid3" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="28" height="28" fill="#141419"/>
+      <line x1="0" y1="0" x2="0" y2="28" stroke="#202027" stroke-width="1"/>
+    </pattern>
+    <pattern id="hazard3" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <rect width="24" height="24" fill="#17171b"/>
+      <rect width="12" height="24" fill="#ff5e1a"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#grid3)"/>
+  <rect y="0" width="1200" height="16" fill="url(#hazard3)"/>
+  <rect y="884" width="1200" height="16" fill="url(#hazard3)"/>
+
+  <g transform="rotate(-3 250 120)">
+    <rect x="60" y="70" width="330" height="52" fill="#ff5e1a"/>
+    <text x="78" y="107" font-size="26" font-weight="900" fill="#0d0d10" letter-spacing="3">PHOTOGRAPHY</text>
+  </g>
+
+  <text x="60" y="330" font-size="120" font-weight="900" font-style="italic" fill="#f0f0f3">CCD</text>
+  <text x="60" y="450" font-size="120" font-weight="900" font-style="italic" fill="#ff5e1a">× 6 YEARS</text>
+  <text x="64" y="540" font-size="40" font-weight="700" fill="#f0f0f3">六年的快门记忆</text>
+  <text x="64" y="592" font-size="26" fill="#9a9aa6">从随手拍，到离不开。</text>
+
+  <!-- 相机 -->
+  <g>
+    <rect x="560" y="360" width="420" height="260" rx="14" fill="#1b1b21" stroke="#ff5e1a" stroke-width="7"/>
+    <rect x="660" y="316" width="150" height="52" rx="8" fill="#1b1b21" stroke="#ff5e1a" stroke-width="7"/>
+    <circle cx="770" cy="500" r="88" fill="#0d0d10" stroke="#ff5e1a" stroke-width="9"/>
+    <circle cx="770" cy="500" r="54" fill="#101016" stroke="#9a9aa6" stroke-width="4"/>
+    <circle cx="752" cy="482" r="16" fill="#f0f0f3" opacity="0.9"/>
+    <rect x="900" y="404" width="30" height="40" fill="#f0f0f3"/>
+    <circle cx="620" cy="500" r="12" fill="#f0f0f3"/>
+    <rect x="614" y="560" width="90" height="12" fill="#ff5e1a"/>
+  </g>
+
+  <text x="560" y="700" font-size="26" fill="#9a9aa6">SMALL SENSOR, BIG JOY.</text>
+  <text x="560" y="744" font-size="26" fill="#9a9aa6">正在攒钱：微单换装计划中。</text>
+
+  <g opacity="0.9">
+    <rect x="1030" y="700" width="110" height="110" fill="none" stroke="#ff5e1a" stroke-width="6"/>
+    <text x="1058" y="775" font-size="58" font-weight="900" fill="#ff5e1a">✦</text>
+  </g>
+</svg>
