@@ -193,16 +193,22 @@ const isActive = (href: string) => {
       document.addEventListener('astro:page-load', zzzNavTick);
       zzzNavTick();
 
-      // 回到页首：滚动超过 400px 显示按钮（window 监听绑一次即可）
-      window.addEventListener(
-        'scroll',
-        () => {
-          document
-            .getElementById('back-top')
-            ?.classList.toggle('show', window.scrollY > 400);
-        },
-        { passive: true },
-      );
+      /* 轮询兜底：部分内嵌浏览器内核不派发 window 滚动事件，
+         且后台标签页会暂停 requestAnimationFrame——
+         用 80ms 定时检查 scrollY 变化（无变化时仅一次数字比较，零开销） */
+      var lastUiY = -1;
+      var uiScrollTick = function () {
+        if (window.scrollY !== lastUiY) {
+          lastUiY = window.scrollY;
+          zzzNavTick();
+          var bt = document.getElementById('back-top');
+          if (bt) {
+            bt.classList.toggle('show', window.scrollY > 400);
+          }
+        }
+      };
+      setInterval(uiScrollTick, 80);
+      uiScrollTick();
 
       // astro:page-load 在首次加载和每次跨页导航后都会触发：
       // 给「当前页面」的按钮重新绑定事件（音频元素本身是持久的，不用重绑）

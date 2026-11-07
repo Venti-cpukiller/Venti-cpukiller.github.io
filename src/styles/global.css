@@ -34,9 +34,9 @@ html[data-theme='dark'] {
 }
 
 html {
-  scroll-behavior: smooth;
-  /* 杜绝一切横向滚动条闪烁（条纹动画等装饰性溢出） */
-  overflow-x: clip;
+  /* 注意：不要在这里加 scroll-behavior: smooth——
+     部分内嵌浏览器内核会静默丢弃所有程序化滚动（scrollTo/scrollIntoView/锚点全部失效）。
+     需要平滑滚动的地方用 JS behavior:'smooth' 显式指定 */
 }
 
 body {

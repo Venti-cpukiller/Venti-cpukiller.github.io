@@ -136,30 +136,28 @@ html[data-art='zzz'] .section-head h2::before {
   );
 }
 
-/* 顶栏底部警示条纹：伪元素自身位移滚动（GPU 加速，循环无缝） */
+/* 顶栏底部警示条纹：background-position 滚动（元素不溢出视口，
+   background-size 锁定完整周期 24√2≈33.9411px，循环严格无缝） */
 html[data-art='zzz'] .site-header::after {
   content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: calc(100% + 34px);
+  display: block;
   height: 5px;
   background: repeating-linear-gradient(
     -45deg,
     var(--accent) 0 12px,
     var(--fg) 12px 24px
   );
+  background-size: 33.9411px 5px;
   animation: zzz-hazard 1.2s linear infinite reverse;
-  pointer-events: none;
 }
 
-/* 位移一个完整水平周期（24px 周期 / sin45°），回卷无接缝 */
+/* 位移一个完整周期，回卷无接缝 */
 @keyframes zzz-hazard {
   from {
-    transform: translateX(0);
+    background-position: 0 0;
   }
   to {
-    transform: translateX(-33.9411px);
+    background-position: 33.9411px 0;
   }
 }
 
@@ -397,10 +395,9 @@ html[data-art='zzz'] .nav-indicator {
   background: var(--accent);
   opacity: 0;
   z-index: 0;
-  transition:
-    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.2s ease;
+  /* 不加 transform 过渡：滚动中 1:1 瞬时跟随（滑动感由平滑滚动本身提供），
+     过渡只会被连续滚动事件反复打断，造成卡顿与追不上 */
+  transition: opacity 0.2s ease;
 }
 
 html[data-art='zzz'] .site-nav a {
