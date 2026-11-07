@@ -140,11 +140,30 @@ const isActive = (href: string) => {
     <!-- 音乐元素跨页持久存在（配合 ClientRouter），切换页面时音乐不断 -->
     <audio id="bgm" src="/audio/bgm.m4a" loop preload="none" transition:persist="bgm"></audio>
     <button id="bgm-toggle" class="bgm-toggle" type="button" aria-label="播放 / 暂停背景音乐" title="背景音乐">♪</button>
+    <button id="back-top" class="back-top" type="button" aria-label="回到页首" title="回到页首">↑</button>
 
     <script>
+      // 回到页首：滚动超过 400px 显示按钮（window 监听绑一次即可）
+      window.addEventListener(
+        'scroll',
+        () => {
+          document
+            .getElementById('back-top')
+            ?.classList.toggle('show', window.scrollY > 400);
+        },
+        { passive: true },
+      );
+
       // astro:page-load 在首次加载和每次跨页导航后都会触发：
       // 给「当前页面」的按钮重新绑定事件（音频元素本身是持久的，不用重绑）
       document.addEventListener('astro:page-load', () => {
+        // 回到页首
+        const backTop = document.getElementById('back-top');
+        if (backTop) {
+          backTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+          backTop.classList.toggle('show', window.scrollY > 400);
+        }
+
         // 移动端菜单：点 ☰ 展开/收起，点链接自动收起
         const menuBtn = document.getElementById('menu-toggle') as HTMLButtonElement;
         const mobileMenu = document.getElementById('mobile-menu') as HTMLElement;

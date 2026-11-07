@@ -136,23 +136,30 @@ html[data-art='zzz'] .section-head h2::before {
   );
 }
 
-/* 顶栏底部警示条纹 */
+/* 顶栏底部警示条纹：伪元素自身位移滚动（GPU 加速，循环无缝） */
 html[data-art='zzz'] .site-header::after {
   content: '';
-  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% + 34px);
   height: 5px;
   background: repeating-linear-gradient(
     -45deg,
     var(--accent) 0 12px,
     var(--fg) 12px 24px
   );
-  /* 条纹滚动动画 */
-  animation: zzz-hazard 1.4s linear infinite;
+  animation: zzz-hazard 1.2s linear infinite;
+  pointer-events: none;
 }
 
+/* 位移一个完整水平周期（24px 周期 / sin45°），回卷无接缝 */
 @keyframes zzz-hazard {
+  from {
+    transform: translateX(0);
+  }
   to {
-    background-position: 33.94px 0;
+    transform: translateX(-33.9411px);
   }
 }
 
@@ -222,6 +229,19 @@ html[data-art='zzz'] .bgm-toggle {
 html[data-art='zzz'] .bgm-toggle.playing {
   background: var(--fg);
   border-color: var(--border);
+  color: var(--accent);
+}
+
+/* 回到页首：与播放键同款橙色方块 */
+html[data-art='zzz'] .back-top {
+  border-radius: 0;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+html[data-art='zzz'] .back-top:hover {
+  background: var(--fg);
   color: var(--accent);
 }
 

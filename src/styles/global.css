@@ -554,6 +554,42 @@ main.container {
   margin: 0;
 }
 
+/* ================= 回到页首按钮 ================= */
+.back-top {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 20;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.back-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-top:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* ================= 背景音乐按钮 ================= */
 .bgm-toggle {
   position: fixed;
