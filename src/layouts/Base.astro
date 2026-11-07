@@ -54,20 +54,28 @@ const isActive = (href: string) => {
     <header class="site-header">
       <div class="container header-inner">
         <a class="logo" href="/">{SITE.title}</a>
-        <nav class="site-nav" aria-label="主导航">
-          {
-            nav.map((item) => (
-              <a
-                href={item.href}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换深色 / 浅色模式"></button>
+        <div class="header-actions">
+          <nav class="site-nav" aria-label="主导航">
+            {
+              nav.map((item) => (
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+          <button id="menu-toggle" class="menu-toggle" type="button" aria-label="打开 / 关闭菜单" aria-expanded="false">☰</button>
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换深色 / 浅色模式"></button>
+        </div>
       </div>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="移动端导航">
+        {nav.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
     </header>
 
     <main class="container">
@@ -118,6 +126,20 @@ const isActive = (href: string) => {
       // astro:page-load 在首次加载和每次跨页导航后都会触发：
       // 给「当前页面」的按钮重新绑定事件（音频元素本身是持久的，不用重绑）
       document.addEventListener('astro:page-load', () => {
+        // 移动端菜单：点 ☰ 展开/收起，点链接自动收起
+        const menuBtn = document.getElementById('menu-toggle') as HTMLButtonElement;
+        const mobileMenu = document.getElementById('mobile-menu') as HTMLElement;
+        const setMenu = (open: boolean) => {
+          mobileMenu.classList.toggle('open', open);
+          menuBtn.setAttribute('aria-expanded', String(open));
+          menuBtn.textContent = open ? '✕' : '☰';
+        };
+        setMenu(false);
+        menuBtn.onclick = () => setMenu(!mobileMenu.classList.contains('open'));
+        mobileMenu.querySelectorAll('a').forEach((a) => {
+          a.addEventListener('click', () => setMenu(false));
+        });
+
         // 主题切换
         const btn = document.getElementById('theme-toggle') as HTMLButtonElement;
         const setIcon = () => {

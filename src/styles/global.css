@@ -118,16 +118,46 @@ main.container {
   color: var(--accent);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
 .site-nav {
   display: flex;
   gap: 0.25rem;
-  margin-left: auto;
   overflow-x: auto;
   scrollbar-width: none;
 }
 
 .site-nav::-webkit-scrollbar {
   display: none;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 0.4rem 1.25rem 0.8rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu a {
+  color: var(--fg);
+  padding: 0.6rem 0.6rem;
+  border-radius: 8px;
+}
+
+.mobile-menu a:hover {
+  background: var(--bg-soft);
+  color: var(--accent);
+  text-decoration: none;
 }
 
 .site-nav a {
@@ -148,7 +178,8 @@ main.container {
   background: var(--accent-soft);
 }
 
-.theme-toggle {
+.theme-toggle,
+.menu-toggle {
   flex-shrink: 0;
   width: 2.2rem;
   height: 2.2rem;
@@ -163,9 +194,15 @@ main.container {
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-.theme-toggle:hover {
-  transform: rotate(15deg) scale(1.05);
+.theme-toggle:hover,
+.menu-toggle:hover {
+  transform: scale(1.05);
   border-color: var(--accent);
+}
+
+/* 桌面端隐藏汉堡按钮（须写在共享样式之后才会生效） */
+.menu-toggle {
+  display: none;
 }
 
 /* ================= 首页 ================= */
@@ -642,6 +679,14 @@ section[id] {
 @media (max-width: 640px) {
   .header-inner {
     gap: 0.6rem;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
   }
 
   .post-item {
