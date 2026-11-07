@@ -453,6 +453,75 @@ main.container {
   margin: 2rem 0;
 }
 
+/* ================= 摄影占位 ================= */
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  color: var(--muted);
+  text-align: center;
+}
+
+.photo-placeholder .photo-icon {
+  font-size: 2rem;
+}
+
+.photo-placeholder p {
+  margin: 0;
+}
+
+/* ================= 背景音乐按钮 ================= */
+.bgm-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 20;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--fg);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.bgm-toggle:hover {
+  border-color: var(--accent);
+}
+
+.bgm-toggle.playing {
+  border-color: var(--accent);
+  animation: bgm-spin 3s linear infinite;
+}
+
+@keyframes bgm-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contact-line {
+  margin-top: 0.4rem;
+}
+
+.contact-line .contact-item {
+  margin: 0 0.15rem;
+}
+
 /* ================= 按钮 / 杂项 ================= */
 .button {
   display: inline-flex;

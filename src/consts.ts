@@ -17,4 +17,13 @@ export const SITE = {
     { label: 'Bilibili', href: 'https://space.bilibili.com/your-id' },
     { label: '邮箱', href: 'mailto:you@example.com' },
   ],
+  /**
+   * 页脚联系方式：value 随时填，留空的会显示「待补」。
+   * 想加微信/知乎等，照格式补一行即可。
+   */
+  contact: [
+    { label: 'QQ', value: '' },
+    { label: '邮箱', value: '' },
+    { label: 'B站', value: '' },
+  ],
 };

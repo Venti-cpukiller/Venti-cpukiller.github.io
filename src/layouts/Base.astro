@@ -75,8 +75,20 @@ const isActive = (href: string) =>
           托管于 GitHub Pages 与 Cloudflare Pages ·
           <a href="/rss.xml">RSS 订阅</a>
         </p>
+        <p class="contact-line">
+          联系我：
+          {SITE.contact.map((c, i) => (
+            <>
+              <span class="contact-item">{c.label}：{c.value || '待补'}</span>
+              {i < SITE.contact.length - 1 && ' · '}
+            </>
+          ))}
+        </p>
       </div>
     </footer>
+
+    <audio id="bgm" src="/audio/bgm.flac" loop preload="none"></audio>
+    <button id="bgm-toggle" class="bgm-toggle" type="button" aria-label="播放 / 暂停背景音乐" title="背景音乐">♪</button>
 
     <script>
       const btn = document.getElementById('theme-toggle') as HTMLButtonElement;
@@ -91,6 +103,22 @@ const isActive = (href: string) =>
         document.documentElement.dataset.theme = next;
         localStorage.setItem('theme', next);
         setIcon();
+      });
+
+      // 背景音乐：点按钮播放/暂停，加载失败时静默隐藏按钮
+      const bgm = document.getElementById('bgm') as HTMLAudioElement;
+      const bgmBtn = document.getElementById('bgm-toggle') as HTMLButtonElement;
+      bgmBtn.addEventListener('click', () => {
+        if (bgm.paused) {
+          bgm.play().catch(() => {});
+          bgmBtn.classList.add('playing');
+        } else {
+          bgm.pause();
+          bgmBtn.classList.remove('playing');
+        }
+      });
+      bgm.addEventListener('error', () => {
+        bgmBtn.style.display = 'none';
       });
     </script>
   </body>

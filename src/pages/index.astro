@@ -16,8 +16,9 @@ const featuredWorks = (await getCollection('works'))
   <section class="hero">
     <h1>你好，我是 {SITE.author} 👋</h1>
     <p class="hero-intro">
-      欢迎来我的个人小站。这里记录我折腾的东西、写一点文章、囤放自己的作品。
-      （这句介绍在 src/consts.ts 和本文件里改）
+      一个爱好广泛的家伙：耳机不离身的音乐爱好者、快门闲不住的摄影新手、
+      二游深度玩家，最近又开始对写代码上头。喜欢一切好玩的东西，
+      更喜欢亲手把它们造出来。这个站收藏我的文字、作品和快门瞬间——慢慢逛，别着急。
     </p>
     <div class="hero-links">
       {SITE.socials.map((s) => (
@@ -63,6 +64,16 @@ const featuredWorks = (await getCollection('works'))
           <p>{work.data.description}</p>
         </a>
       ))}
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="section-head">
+      <h2>摄影</h2>
+    </div>
+    <div class="photo-placeholder">
+      <span class="photo-icon">📷</span>
+      <p>摄影作品整理中——这里以后会挂上我的快门瞬间。</p>
     </div>
   </section>
 </Base>
