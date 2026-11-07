@@ -1,0 +1,199 @@
+/* ============================================================
+   艺术风格主题层：通过 <html data-art="sketch|zzz"> 启用。
+   不设置 data-art 时使用默认设计。选定风格后可删除另一分支。
+   ============================================================ */
+
+/* ==================== 手绘风 sketch ==================== */
+html[data-art='sketch'] {
+  --bg: #faf6ec;
+  --bg-soft: #f2ecdc;
+  --card: #fffdf4;
+  --border: #d8ccb2;
+  --fg: #3b3527;
+  --muted: #8c8470;
+  --accent: #c75c33;
+  --accent-soft: #f6e3d7;
+  --accent-fg: #fffdf4;
+  --shadow: 2px 3px 0 rgb(59 53 39 / 14%);
+  --font-hand: 'Kaiti SC', 'STKaiti', KaiTi, 'DFKai-SB', '楷体', serif;
+}
+
+html[data-theme='dark'][data-art='sketch'] {
+  --bg: #26231c;
+  --bg-soft: #302c23;
+  --card: #2d2a21;
+  --border: #4a4433;
+  --fg: #ece5d2;
+  --muted: #a99f86;
+  --accent: #e08a5c;
+  --accent-soft: #3d2c20;
+  --accent-fg: #26231c;
+  --shadow: 2px 3px 0 rgb(0 0 0 / 35%);
+}
+
+html[data-art='sketch'] body,
+html[data-art='sketch'] h1,
+html[data-art='sketch'] h2,
+html[data-art='sketch'] h3,
+html[data-art='sketch'] .logo {
+  font-family: var(--font-hand);
+}
+
+/* 手绘边框：四个角半径各不相同，模拟手抖的线条 */
+html[data-art='sketch'] .card,
+html[data-art='sketch'] .chip,
+html[data-art='sketch'] .button,
+html[data-art='sketch'] .theme-toggle,
+html[data-art='sketch'] .menu-toggle,
+html[data-art='sketch'] .bgm-toggle,
+html[data-art='sketch'] .photo-placeholder,
+html[data-art='sketch'] .prose pre,
+html[data-art='sketch'] .prose code,
+html[data-art='sketch'] .mobile-menu a {
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+html[data-art='sketch'] .prose h2 {
+  border-bottom: 2px dashed var(--border);
+}
+
+html[data-art='sketch'] .prose blockquote {
+  border-left: 3px dashed var(--accent);
+}
+
+html[data-art='sketch'] .post-list li + li {
+  border-top: 2px dashed var(--border);
+}
+
+html[data-art='sketch'] .article-meta {
+  border-bottom: 2px dashed var(--border);
+}
+
+html[data-art='sketch'] .section-head h2::after {
+  content: ' ✎';
+}
+
+/* 卡片像便签一样轻微歪斜 */
+html[data-art='sketch'] .card {
+  transform: rotate(-0.4deg);
+}
+
+html[data-art='sketch'] .card:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+html[data-art='sketch'] .card:hover {
+  transform: translateY(-3px) rotate(0deg);
+}
+
+/* ==================== 绝区零风 zzz ==================== */
+html[data-art='zzz'] {
+  --bg: #f2f2f4;
+  --bg-soft: #e6e6ea;
+  --card: #ffffff;
+  --border: #17171b;
+  --fg: #17171b;
+  --muted: #6d6d78;
+  --accent: #ff5e1a;
+  --accent-soft: #ffe3d4;
+  --accent-fg: #ffffff;
+  --shadow: 4px 4px 0 rgb(23 23 27 / 90%);
+  --radius: 0px;
+}
+
+html[data-theme='dark'][data-art='zzz'] {
+  --bg: #0d0d10;
+  --bg-soft: #17171c;
+  --card: #141419;
+  --border: #2e2e36;
+  --fg: #f0f0f3;
+  --muted: #9a9aa6;
+  --accent: #ff5e1a;
+  --accent-soft: #33190a;
+  --accent-fg: #0d0d10;
+  --shadow: 4px 4px 0 rgb(255 94 26 / 45%);
+}
+
+html[data-art='zzz'] .hero h1,
+html[data-art='zzz'] .section-head h2,
+html[data-art='zzz'] .page-title {
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
+/* 标题前的斜纹警示色块 */
+html[data-art='zzz'] .section-head h2::before {
+  content: '';
+  display: inline-block;
+  width: 1.4rem;
+  height: 0.85em;
+  margin-right: 0.5rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0 6px,
+    var(--fg) 6px 12px
+  );
+}
+
+/* 顶栏底部警示条纹 */
+html[data-art='zzz'] .site-header::after {
+  content: '';
+  display: block;
+  height: 5px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0 12px,
+    var(--fg) 12px 24px
+  );
+}
+
+html[data-art='zzz'] .site-header,
+html[data-art='zzz'] .site-footer {
+  border-color: var(--border);
+}
+
+html[data-art='zzz'] .site-footer {
+  border-top-width: 3px;
+}
+
+/* 卡片：直角 + 硬阴影贴纸感 */
+html[data-art='zzz'] .card {
+  border: 2px solid var(--border);
+  border-radius: 0;
+}
+
+html[data-art='zzz'] .card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+html[data-art='zzz'] .chip {
+  border: 2px solid var(--border);
+  border-radius: 0;
+}
+
+html[data-art='zzz'] .button {
+  border-radius: 0;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+html[data-art='zzz'] .prose pre {
+  border: 2px solid var(--border);
+  border-radius: 0;
+}
+
+/* 圆钮变方钮（贴纸感） */
+html[data-art='zzz'] .theme-toggle,
+html[data-art='zzz'] .menu-toggle,
+html[data-art='zzz'] .bgm-toggle {
+  border-radius: 0;
+  border: 2px solid var(--border);
+}

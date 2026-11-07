@@ -36,4 +36,21 @@ export const SITE = {
     },
     { label: 'B站', value: '516191350', href: 'https://space.bilibili.com/516191350' },
   ],
+  /**
+   * giscus 评论系统（文章页底部，由 GitHub Discussions 驱动）。
+   * 到 https://giscus.app/zh-CN 用 GitHub 授权安装 App 并选好分类后，
+   * 把页面生成的 repoId 和 categoryId 填进下面两项即可启用（repo 已填好）。
+   */
+  giscus: {
+    repo: 'Venti-cpukiller/Venti-cpukiller.github.io',
+    repoId: 'R_kgDOVl0moA',
+    category: 'Announcements',
+    categoryId: '',
+  },
+  /**
+   * Cloudflare Web Analytics 的 beacon token。
+   * Cloudflare 控制台 → Analytics & Logs → Web Analytics → 添加站点，
+   * 把复制的 token 粘贴到这里即可启用访问统计。
+   */
+  cfAnalyticsToken: '',
 };
