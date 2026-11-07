@@ -197,3 +197,118 @@ html[data-art='zzz'] .bgm-toggle {
   border-radius: 0;
   border: 2px solid var(--border);
 }
+
+/* ============ 加大剂量：味要冲 ============ */
+
+/* 滚动横幅（只在绝区零风显示） */
+.zzz-marquee {
+  display: none;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  padding: 0.45rem 0;
+  user-select: none;
+}
+
+.zzz-marquee span {
+  display: inline-block;
+  animation: zzz-ticker 22s linear infinite;
+}
+
+@keyframes zzz-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html[data-art='zzz'] .zzz-marquee {
+  display: block;
+}
+
+/* 巨型描边水印 */
+html[data-art='zzz'] .hero {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-art='zzz'] .hero::before {
+  content: 'VENTI';
+  position: absolute;
+  right: -1rem;
+  top: 45%;
+  transform: translateY(-50%) rotate(-6deg);
+  font-size: clamp(6rem, 16vw, 11rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(23 23 27 / 10%);
+  pointer-events: none;
+}
+
+html[data-theme='dark'][data-art='zzz'] .hero::before {
+  -webkit-text-stroke: 2px rgb(240 240 243 / 9%);
+}
+
+html[data-art='zzz'] .hero-grid {
+  position: relative;
+}
+
+/* 大标题硬阴影 */
+html[data-art='zzz'] .hero h1 {
+  text-shadow: 3px 3px 0 var(--accent);
+}
+
+/* 背景细斜纹 */
+html[data-art='zzz'] body {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgb(23 23 27 / 3%) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+html[data-theme='dark'][data-art='zzz'] body {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgb(240 240 243 / 3%) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+/* 导航当前项：橙色方块 */
+html[data-art='zzz'] .site-nav a[aria-current='page'] {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* 卡片 hover：整卡反色 */
+html[data-art='zzz'] .card:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 6px 6px 0 var(--fg);
+}
+
+html[data-art='zzz'] .card:hover h3,
+html[data-art='zzz'] .card:hover p {
+  color: #ffffff;
+}
+
+html[data-art='zzz'] .card:hover .tag {
+  background: rgb(255 255 255 / 22%);
+  color: #ffffff;
+}
+
+/* 分区之间的斜纹分隔 */
+html[data-art='zzz'] .home-section + .home-section {
+  border-top: 2px dashed var(--border);
+  padding-top: 2rem;
+}
