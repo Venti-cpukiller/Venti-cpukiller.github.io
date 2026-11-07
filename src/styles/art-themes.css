@@ -377,10 +377,9 @@ html[data-theme='dark'][data-art='zzz'] body {
   );
 }
 
-/* 导航当前项：静态橙块由滑动指示器接管 */
+/* 导航当前项：静态橙块与颜色均由滑动指示器 + nav-active 接管 */
 html[data-art='zzz'] .site-nav a[aria-current='page'] {
   background: transparent;
-  color: #ffffff;
 }
 
 /* 顶部导航滑动指示器：随滚动滑到当前区块 */
@@ -407,6 +406,7 @@ html[data-art='zzz'] .nav-indicator {
 html[data-art='zzz'] .site-nav a {
   position: relative;
   z-index: 1;
+  color: var(--accent);
 }
 
 html[data-art='zzz'] .site-nav a.nav-active {
@@ -415,7 +415,7 @@ html[data-art='zzz'] .site-nav a.nav-active {
 
 html[data-art='zzz'] .site-nav a:hover {
   background: transparent;
-  color: var(--accent);
+  color: #ffffff;
 }
 
 html[data-art='zzz'] .site-nav a.nav-active:hover {
