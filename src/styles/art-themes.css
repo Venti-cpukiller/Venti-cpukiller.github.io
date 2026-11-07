@@ -314,6 +314,11 @@ html[data-art='zzz'] .home-section + .home-section {
 }
 
 /* 头像：贴纸质感（硬边 + 橙色错位阴影 + 轻微歪斜） */
+html[data-art='zzz'] .hero-avatar {
+  /* 留出阴影空间，窄窗口下也不会被视口边缘裁掉 */
+  margin-right: 14px;
+}
+
 html[data-art='zzz'] .hero-avatar img {
   border-radius: 0;
   border: 2px solid var(--border);
