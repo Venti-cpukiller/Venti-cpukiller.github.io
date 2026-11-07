@@ -312,3 +312,11 @@ html[data-art='zzz'] .home-section + .home-section {
   border-top: 2px dashed var(--border);
   padding-top: 2rem;
 }
+
+/* 头像：贴纸质感（硬边 + 橙色错位阴影 + 轻微歪斜） */
+html[data-art='zzz'] .hero-avatar img {
+  border-radius: 0;
+  border: 2px solid var(--border);
+  box-shadow: 8px 8px 0 var(--accent);
+  transform: rotate(-1.2deg);
+}
