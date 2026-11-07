@@ -138,6 +138,11 @@ main.container {
   display: none;
 }
 
+/* 滑动指示器：仅绝区零风显示（base 隐藏） */
+.nav-indicator {
+  display: none;
+}
+
 .mobile-menu {
   display: none;
   flex-direction: column;

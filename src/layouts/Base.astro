@@ -75,8 +75,9 @@ const isActive = (href: string) => {
         <button id="menu-toggle" class="menu-toggle" type="button" aria-label="打开 / 关闭菜单" aria-expanded="false">☰</button>
         <a class="logo" href="/">{SITE.title}</a>
         <div class="header-actions">
-          <nav class="site-nav" aria-label="主导航">
-            {
+        <nav class="site-nav" aria-label="主导航">
+          <span id="nav-indicator" class="nav-indicator" aria-hidden="true"></span>
+          {
               nav.map((item) => (
                 <a
                   href={item.href}
@@ -143,6 +144,55 @@ const isActive = (href: string) => {
     <button id="back-top" class="back-top" type="button" aria-label="回到页首" title="回到页首">↑</button>
 
     <script>
+      // 顶部导航滑动指示器（zzz 风）：随滚动位置滑到当前区块对应的导航项
+      var zzzNavTick = function () {
+        var ind = document.getElementById('nav-indicator');
+        var nav = document.querySelector('.site-nav');
+        if (!ind || !nav) return;
+        var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+        var path = window.location.pathname;
+        var activeIdx = -1;
+        if (path === '/') {
+          var line = window.innerHeight * 0.4;
+          var blogEl = document.getElementById('blog');
+          var worksEl = document.getElementById('works');
+          var blogTop = blogEl
+            ? blogEl.getBoundingClientRect().top
+            : Number.POSITIVE_INFINITY;
+          var worksTop = worksEl
+            ? worksEl.getBoundingClientRect().top
+            : Number.POSITIVE_INFINITY;
+          if (worksTop <= line) {
+            activeIdx = 2;
+          } else if (blogTop <= line) {
+            activeIdx = 1;
+          } else {
+            activeIdx = 0;
+          }
+        } else if (path.indexOf('/blog') === 0) {
+          activeIdx = 1;
+        } else if (path.indexOf('/works') === 0) {
+          activeIdx = 2;
+        } else if (path.indexOf('/about') === 0) {
+          activeIdx = 3;
+        }
+        links.forEach(function (l, i) {
+          l.classList.toggle('nav-active', i === activeIdx);
+        });
+        var target = activeIdx >= 0 ? links[activeIdx] : null;
+        if (!target) {
+          ind.style.opacity = '0';
+          return;
+        }
+        ind.style.opacity = '1';
+        ind.style.width = target.offsetWidth + 'px';
+        ind.style.transform = 'translateX(' + target.offsetLeft + 'px)';
+      };
+      window.addEventListener('scroll', zzzNavTick, { passive: true });
+      window.addEventListener('resize', zzzNavTick);
+      document.addEventListener('astro:page-load', zzzNavTick);
+      zzzNavTick();
+
       // 回到页首：滚动超过 400px 显示按钮（window 监听绑一次即可）
       window.addEventListener(
         'scroll',

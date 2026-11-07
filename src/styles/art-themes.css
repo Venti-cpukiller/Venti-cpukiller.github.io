@@ -250,6 +250,7 @@ html[data-art='zzz'] .home-feed-clip {
 html[data-art='zzz'] .button:hover {
   background: #ffffff;
   color: var(--accent);
+  box-shadow: inset 0 0 0 2px var(--accent);
 }
 
 /* 回到页首：与播放键同款橙色方块，悬停反白 */
@@ -376,9 +377,48 @@ html[data-theme='dark'][data-art='zzz'] body {
   );
 }
 
-/* 导航当前项：橙色方块 */
+/* 导航当前项：静态橙块由滑动指示器接管 */
 html[data-art='zzz'] .site-nav a[aria-current='page'] {
+  background: transparent;
+  color: #ffffff;
+}
+
+/* 顶部导航滑动指示器：随滚动滑到当前区块 */
+html[data-art='zzz'] .site-nav {
+  position: relative;
+}
+
+html[data-art='zzz'] .nav-indicator {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
   background: var(--accent);
+  opacity: 0;
+  z-index: 0;
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+}
+
+html[data-art='zzz'] .site-nav a {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-art='zzz'] .site-nav a.nav-active {
+  color: #ffffff;
+}
+
+html[data-art='zzz'] .site-nav a:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+html[data-art='zzz'] .site-nav a.nav-active:hover {
   color: #ffffff;
 }
 
