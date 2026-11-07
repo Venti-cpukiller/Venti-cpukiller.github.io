@@ -233,9 +233,18 @@ html[data-art='zzz'] .bgm-toggle.playing {
 }
 
 /* 引出按钮与主按钮悬停反白（与双钮统一） */
+html[data-art='zzz'] .chip {
+  box-shadow: var(--shadow);
+}
+
 html[data-art='zzz'] .chip:hover {
   background: #ffffff;
   color: var(--accent);
+}
+
+/* 首页裁剪容器留出硬阴影余量，最右列阴影不被吞 */
+html[data-art='zzz'] .home-feed-clip {
+  padding-right: 8px;
 }
 
 html[data-art='zzz'] .button:hover {

@@ -35,6 +35,8 @@ html[data-theme='dark'] {
 
 html {
   scroll-behavior: smooth;
+  /* 杜绝一切横向滚动条闪烁（条纹动画等装饰性溢出） */
+  overflow-x: clip;
 }
 
 body {
