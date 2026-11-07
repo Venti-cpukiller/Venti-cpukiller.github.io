@@ -4,13 +4,16 @@
 
 ## 常用命令
 
-在项目目录（`personal-site/`）里打开终端：
+在项目目录（本文件夹）里打开终端：
 
 | 命令 | 作用 |
 | --- | --- |
 | `npm run dev` | 本地开发预览，浏览器打开 http://localhost:4321 |
 | `npm run build` | 构建到 `dist/` 目录 |
 | `npm run preview` | 预览构建结果 |
+
+> **排障提示**：改了样式但页面不生效时，多半是 Vite 的转换缓存旧了——
+> 删掉 `node_modules/.vite` 和 `.astro` 两个文件夹再重启 `npm run dev` 即可（它们会自动重新生成）。
 
 ## 想改什么，去哪改
 
