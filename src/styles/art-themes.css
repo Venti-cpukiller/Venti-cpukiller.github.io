@@ -327,6 +327,29 @@ html[data-art='zzz'] .article-cover {
   box-shadow: 8px 8px 0 var(--accent-soft);
 }
 
+/* 照片墙：直角 + 硬阴影 + 悬停微缩放 */
+html[data-art='zzz'] .photo-card {
+  border: 2px solid var(--border);
+  border-radius: 0;
+}
+
+html[data-art='zzz'] .photo-card:hover {
+  box-shadow: 6px 6px 0 var(--accent);
+  transform: translate(-2px, -2px);
+}
+
+html[data-art='zzz'] .photo-card:hover img {
+  transform: scale(1.03);
+}
+
+html[data-art='zzz'] .photo-card img {
+  transition: transform 0.4s ease;
+}
+
+html[data-art='zzz'] .photo-card figcaption {
+  border-top: 2px solid var(--border);
+}
+
 /* ============ 加大剂量：味要冲 ============ */
 
 /* 滚动横幅（只在绝区零风显示） */

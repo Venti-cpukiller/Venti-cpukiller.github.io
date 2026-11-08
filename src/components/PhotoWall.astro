@@ -1,0 +1,40 @@
+---
+// 照片墙：Astro Image 构建时自动生成 webp 多尺寸变体（懒加载、EXIF 已在入库时抹除）
+// 加照片 = src/assets/photos/ 丢图 + src/data/photos.ts 加一条
+import { Image } from 'astro:assets';
+import { photos } from '../data/photos';
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/photos/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+
+const resolve = (file: string) =>
+  images['../assets/photos/' + file.replace('./', '')];
+---
+
+<div class="photo-wall">
+  {
+    photos.map((p) => {
+      const img = resolve(p.file);
+      return img ? (
+        <figure class="photo-card">
+          <div class="photo-frame">
+            <Image
+              src={img.default}
+              alt={p.alt}
+              widths={[480, 800, 1280]}
+              sizes="(max-width: 700px) 92vw, (max-width: 1150px) 46vw, 30vw"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>
+            <span class="photo-caption">{p.caption}</span>
+            <time class="photo-date">{p.date}</time>
+          </figcaption>
+        </figure>
+      ) : null;
+    })
+  }
+</div>

@@ -639,6 +639,64 @@ section[id] {
   scroll-margin-top: 4.5rem;
 }
 
+/* ================= 照片墙 ================= */
+.photo-wall {
+  columns: 3;
+  column-gap: 1.25rem;
+}
+
+@media (max-width: 1150px) {
+  .photo-wall {
+    columns: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .photo-wall {
+    columns: 1;
+  }
+}
+
+.photo-card {
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.photo-frame {
+  overflow: hidden;
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.photo-card figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.photo-caption {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.photo-date {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ================= 博客信息流（敲敲风） ================= */
 .feed {
   columns: 3;

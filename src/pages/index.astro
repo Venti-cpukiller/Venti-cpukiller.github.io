@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import PhotoWall from '../components/PhotoWall.astro';
 import { SITE } from '../consts';
 
 const latestPosts = (await getCollection('blog', ({ data }) => !data.draft))
@@ -113,13 +114,10 @@ const featuredWorks = (await getCollection('works'))
       </div>
     </div>
 
-    <!-- 分类二：摄影 -->
+    <!-- 分类二：摄影（照片墙：src/data/photos.ts 加一条即上新） -->
     <div class="work-category">
       <h3>摄影</h3>
-      <div class="photo-placeholder">
-        <span class="photo-icon">📷</span>
-        <p>摄影作品整理中——这里以后会挂上我的快门瞬间。</p>
-      </div>
+      <PhotoWall />
     </div>
   </section>
 </Base>
