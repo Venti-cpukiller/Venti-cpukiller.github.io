@@ -732,6 +732,32 @@ section[id] {
   font-variant-numeric: tabular-nums;
 }
 
+/* 拍立得相框（摄影详情页）：白框 + 厚底留白写标题 */
+.polaroid {
+  background: #ffffff;
+  border: 2px solid var(--border);
+  box-shadow: 8px 8px 0 var(--accent-soft);
+  padding: 14px 14px 18px;
+}
+
+.polaroid-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+.polaroid-caption {
+  margin: 14px 0 0;
+  text-align: center;
+  font-family: 'Kaiti SC', 'STKaiti', KaiTi, '楷体', serif;
+  font-size: 1.3rem;
+  color: var(--fg);
+}
+
 /* 摄影详情页：上一篇 / 下一篇 */
 .photo-nav {
   display: flex;

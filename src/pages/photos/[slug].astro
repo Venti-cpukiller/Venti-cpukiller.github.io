@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import Comments from '../../components/Comments.astro';
 import { photos } from '../../data/photos';
 import { SITE } from '../../consts';
 
@@ -48,20 +49,23 @@ const img = images['../../assets/photos/' + photo.file.replace('./', '')];
         <span class="like-count" id="like-count">…</span>
       </button>
     </div>
-    {
-      img && (
-        <Image
-          class="article-cover"
-          src={img.default}
-          alt={photo.alt}
-          widths={[800, 1600]}
-          sizes="(max-width: 900px) 92vw, 62rem"
-          loading="eager"
-          decoding="async"
-        />
-      )
-    }
-    <h1>{photo.caption}</h1>
+    <div class="polaroid">
+      <div class="polaroid-img">
+        {
+          img && (
+            <Image
+              src={img.default}
+              alt={photo.alt}
+              widths={[800, 1600]}
+              sizes="(max-width: 900px) 92vw, 62rem"
+              loading="eager"
+              decoding="async"
+            />
+          )
+        }
+      </div>
+      <p class="polaroid-caption">{photo.caption}</p>
+    </div>
     <nav class="photo-nav">
       {
         prev && (
@@ -77,6 +81,7 @@ const img = images['../../assets/photos/' + photo.file.replace('./', '')];
       }
     </nav>
     <a class="back" href="/photos/">← 返回摄影</a>
+    <Comments />
   </article>
   <script>
     // 匿名点赞：Cloudflare Worker + KV 计数，无登录；localStorage 记住本机是否已赞
