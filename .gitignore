@@ -9,3 +9,4 @@ Thumbs.db
 
 # 本地素材备份（不进仓库）
 source-media/
+build-log.txt

@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { photos } from '../../data/photos';
+import { SITE } from '../../consts';
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/photos/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+
+const resolve = (file: string) =>
+  images['../../assets/photos/' + file.replace('./', '')];
+---
+
+<Base title={`摄影 · ${SITE.title}`} description={`${SITE.author} 的摄影照片`}>
+  <h1 class="page-title">摄影</h1>
+  <div class="feed">
+    {
+      photos.map((p) => {
+        const img = resolve(p.file);
+        return (
+          <article class="feed-card">
+            <div class="feed-head">
+              <img
+                class="feed-avatar"
+                src="/img/avatar.jpg"
+                alt={SITE.author}
+                width="40"
+                height="40"
+              />
+              <div class="feed-author">
+                <span class="feed-name">{SITE.author}</span>
+                <time class="feed-date">{p.date}</time>
+              </div>
+            </div>
+            <a class="feed-cover" href={`/photos/${p.slug}/`} aria-label={p.caption}>
+              {img && (
+                <Image
+                  src={img.default}
+                  alt={p.alt}
+                  widths={[480, 800]}
+                  sizes="(max-width: 1150px) 92vw, 30vw"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </a>
+            <div class="feed-body">
+              <h2 class="feed-title">
+                <a href={`/photos/${p.slug}/`}>{p.caption}</a>
+              </h2>
+              <a class="more" href={`/photos/${p.slug}/`}>
+                查看详情 →
+              </a>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</Base>

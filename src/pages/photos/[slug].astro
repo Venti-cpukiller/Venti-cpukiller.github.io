@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { photos } from '../../data/photos';
+import { SITE } from '../../consts';
+
+export function getStaticPaths() {
+  return photos.map((p, i) => ({
+    params: { slug: p.slug },
+    props: {
+      photo: p,
+      prev: photos[(i - 1 + photos.length) % photos.length],
+      next: photos[(i + 1) % photos.length],
+    },
+  }));
+}
+
+const { photo, prev, next } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/photos/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+const img = images['../../assets/photos/' + photo.file.replace('./', '')];
+---
+
+<Base title={`${photo.caption} · 摄影 · ${SITE.title}`} description={photo.description}>
+  <article class="article">
+    {
+      img && (
+        <Image
+          class="article-cover"
+          src={img.default}
+          alt={photo.alt}
+          widths={[800, 1600]}
+          sizes="(max-width: 900px) 92vw, 62rem"
+          loading="eager"
+          decoding="async"
+        />
+      )
+    }
+    <h1>{photo.caption}</h1>
+    <div class="article-meta">
+      <time>{photo.date}</time>
+    </div>
+    {photo.description && (
+      <div class="prose">
+        <p>{photo.description}</p>
+      </div>
+    )}
+    <nav class="photo-nav">
+      {
+        prev && (
+          <a href={`/photos/${prev.slug}/`}>← {prev.caption}</a>
+        )
+      }
+      {
+        next && (
+          <a class="photo-nav-next" href={`/photos/${next.slug}/`}>
+            {next.caption} →
+          </a>
+        )
+      }
+    </nav>
+    <a class="back" href="/photos/">← 返回摄影</a>
+  </article>
+</Base>
