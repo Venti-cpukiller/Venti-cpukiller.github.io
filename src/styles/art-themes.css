@@ -194,6 +194,8 @@ html[data-art='zzz'] .chip {
 
 html[data-art='zzz'] .button {
   border-radius: 0;
+  position: relative;
+  z-index: 0;
   clip-path: polygon(
     0 0,
     calc(100% - 10px) 0,
@@ -248,11 +250,41 @@ html[data-art='zzz'] .home-feed-clip {
 
 /* 悬停反白 + 橙色内嵌边框：裁角 clip-path 在悬停时解除，
    否则 inset 阴影会被切角削出缺口（bug 截图所示） */
+/* 悬停：白底 + 橙色描边，二者都跟随切角形状
+   （::before 橙色底层 + ::after 白色内层，内层 inset 2px 露出橙边） */
 html[data-art='zzz'] .button:hover {
-  background: #ffffff;
+  background: transparent;
   color: var(--accent);
-  clip-path: none;
-  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+html[data-art='zzz'] .button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  z-index: -2;
+}
+
+html[data-art='zzz'] .button::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #ffffff;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+html[data-art='zzz'] .button:hover::after {
+  opacity: 1;
 }
 
 /* 回到页首：与播放键同款橙色方块，悬停反白 */
