@@ -219,17 +219,18 @@ html[data-art='zzz'] .bgm-toggle {
   border: 2px solid var(--border);
 }
 
-/* 播放按钮并入主题色：待机橙色，播放反白 */
+/* 播放按钮并入主题色：橙底白图标、无黑边黑影（悬停反白） */
 html[data-art='zzz'] .bgm-toggle {
   background: var(--accent);
   border-color: var(--accent);
   color: #ffffff;
+  box-shadow: none;
 }
 
 /* 播放态：保持橙色系，仅以 ❚❚/▶︎ 图标区分（黑色反色块太跳，已废） */
 html[data-art='zzz'] .bgm-toggle.playing {
   background: var(--accent);
-  border-color: var(--border);
+  border-color: var(--accent);
   color: #ffffff;
 }
 
