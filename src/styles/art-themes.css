@@ -224,10 +224,11 @@ html[data-art='zzz'] .bgm-toggle {
   color: #ffffff;
 }
 
+/* 播放态：保持橙色系，仅以 ❚❚/▶︎ 图标区分（黑色反色块太跳，已废） */
 html[data-art='zzz'] .bgm-toggle.playing {
-  background: var(--fg);
+  background: var(--accent);
   border-color: var(--border);
-  color: var(--accent);
+  color: #ffffff;
 }
 
 /* 引出按钮与主按钮悬停反白（与双钮统一） */
@@ -245,9 +246,12 @@ html[data-art='zzz'] .home-feed-clip {
   padding-right: 8px;
 }
 
+/* 悬停反白 + 橙色内嵌边框：裁角 clip-path 在悬停时解除，
+   否则 inset 阴影会被切角削出缺口（bug 截图所示） */
 html[data-art='zzz'] .button:hover {
   background: #ffffff;
   color: var(--accent);
+  clip-path: none;
   box-shadow: inset 0 0 0 2px var(--accent);
 }
 
