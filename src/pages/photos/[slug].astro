@@ -23,8 +23,21 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 const img = images['../../assets/photos/' + photo.file.replace('./', '')];
 ---
 
-<Base title={`${photo.caption} · 摄影 · ${SITE.title}`} description={photo.description}>
+<Base title={`${photo.caption} · 摄影 · ${SITE.title}`} description={photo.caption}>
   <article class="article">
+    <div class="feed-head">
+      <img
+        class="feed-avatar"
+        src="/img/avatar.jpg"
+        alt={SITE.author}
+        width="40"
+        height="40"
+      />
+      <div class="feed-author">
+        <span class="feed-name">{SITE.author}</span>
+        <time class="feed-date">{photo.date}</time>
+      </div>
+    </div>
     {
       img && (
         <Image
@@ -39,14 +52,6 @@ const img = images['../../assets/photos/' + photo.file.replace('./', '')];
       )
     }
     <h1>{photo.caption}</h1>
-    <div class="article-meta">
-      <time>{photo.date}</time>
-    </div>
-    {photo.description && (
-      <div class="prose">
-        <p>{photo.description}</p>
-      </div>
-    )}
     <nav class="photo-nav">
       {
         prev && (
