@@ -45,7 +45,7 @@ export const SITE = {
     repo: 'Venti-cpukiller/Venti-cpukiller.github.io',
     repoId: 'R_kgDOVl0moA',
     category: 'Announcements',
-    categoryId: '',
+    categoryId: 'DIC_kwDOVl0moM4DKouf',
   },
   /**
    * Cloudflare Web Analytics 的 beacon token。
