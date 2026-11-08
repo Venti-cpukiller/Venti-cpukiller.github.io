@@ -287,6 +287,20 @@ html[data-art='zzz'] .button:hover::after {
   opacity: 1;
 }
 
+/* 点赞按钮：并入主题（橙底白心；已赞/悬停反白） */
+html[data-art='zzz'] .like-btn {
+  border: 2px solid var(--accent);
+  border-radius: 0;
+  background: var(--accent);
+  color: #ffffff;
+}
+
+html[data-art='zzz'] .like-btn.liked,
+html[data-art='zzz'] .like-btn:hover {
+  background: #ffffff;
+  color: var(--accent);
+}
+
 /* 回到页首：与播放键同款橙色方块，悬停反白 */
 html[data-art='zzz'] .back-top {
   border-radius: 0;

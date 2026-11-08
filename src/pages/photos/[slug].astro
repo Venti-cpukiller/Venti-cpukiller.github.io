@@ -37,6 +37,16 @@ const img = images['../../assets/photos/' + photo.file.replace('./', '')];
         <span class="feed-name">{SITE.author}</span>
         <time class="feed-date">{photo.date}</time>
       </div>
+      <button
+        id="like-btn"
+        class="like-btn"
+        type="button"
+        data-id={photo.slug}
+        aria-label="点赞这张照片"
+      >
+        <span class="like-glyph" aria-hidden="true">♥</span>
+        <span class="like-count" id="like-count">…</span>
+      </button>
     </div>
     {
       img && (
@@ -68,4 +78,45 @@ const img = images['../../assets/photos/' + photo.file.replace('./', '')];
     </nav>
     <a class="back" href="/photos/">← 返回摄影</a>
   </article>
+  <script>
+    // 匿名点赞：Cloudflare Worker + KV 计数，无登录；localStorage 记住本机是否已赞
+    const API_BASE = 'https://venti-likes.1913554056.workers.dev/api';
+    const btn = document.getElementById('like-btn') as HTMLButtonElement;
+    const countEl = document.getElementById('like-count') as HTMLElement;
+    const id = btn.dataset.id as string;
+    const likedKey = 'liked-photo-' + id;
+
+    const setLiked = (liked: boolean) =>
+      btn.classList.toggle('liked', liked);
+    setLiked(localStorage.getItem(likedKey) === '1');
+
+    btn.onclick = async () => {
+      const liked = localStorage.getItem(likedKey) === '1';
+      const ep = liked ? '/unlike/' : '/like/';
+      btn.disabled = true;
+      try {
+        const r = await fetch(API_BASE + ep + id, { method: 'POST' });
+        const d = await r.json();
+        countEl.textContent = String(d.count);
+        if (liked) {
+          localStorage.removeItem(likedKey);
+        } else {
+          localStorage.setItem(likedKey, '1');
+        }
+        setLiked(!liked);
+      } catch (e) {
+        /* 网络失败时静默，保持原状 */
+      }
+      btn.disabled = false;
+    };
+
+    fetch(API_BASE + '/like/' + id)
+      .then((r) => r.json())
+      .then((d) => {
+        countEl.textContent = String(d.count);
+      })
+      .catch(() => {
+        btn.style.display = 'none';
+      });
+  </script>
 </Base>

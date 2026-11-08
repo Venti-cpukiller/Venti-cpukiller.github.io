@@ -1,0 +1,9 @@
+# 匿名点赞计数 Worker
+# 部署：npx wrangler deploy（需先 wrangler login + kv namespace create）
+name = "venti-likes"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[[kv_namespaces]]
+binding = "LIKES"
+id = "96ee77299318482a8d4eac592a5a63c6"
