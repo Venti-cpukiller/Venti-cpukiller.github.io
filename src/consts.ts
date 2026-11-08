@@ -52,5 +52,5 @@ export const SITE = {
    * Cloudflare 控制台 → Analytics & Logs → Web Analytics → 添加站点，
    * 把复制的 token 粘贴到这里即可启用访问统计。
    */
-  cfAnalyticsToken: '',
+  cfAnalyticsToken: '9baa36a70e1946f5a3654475299561f7',
 };
